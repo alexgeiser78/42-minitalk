@@ -6,8 +6,11 @@
 /*   By: ageiser <ageiser@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:24:58 by ageiser           #+#    #+#             */
-/*   Updated: 2023/04/18 17:10:31 by ageiser          ###   ########.fr       */
+/*   Updated: 2023/04/20 16:54:45 by ageiser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minitalk.h"
+
+int main()
+{}
