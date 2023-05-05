@@ -6,23 +6,53 @@
 /*   By: ageiser <ageiser@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:20:51 by ageiser           #+#    #+#             */
-/*   Updated: 2023/04/25 13:34:31 by ageiser          ###   ########.fr       */
+/*   Updated: 2023/05/05 18:13:45 by ageiser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int main(void)
+static void	print_msg(int signal)
 {
-	pid_t	my_PID;
+	static int	bit;
+	static int	character;
 
+	if (signal == SIGUSR1)
+//	{
+		character += 1 << (7 - bit);
+//	ft_printf("bit = %d\n", bit); //
+//	ft_printf("character = %d\n", character);//
+//	ft_printf("1");
+//	}
+	bit++;
+	if (bit == 8)
+	{
+		ft_putchar_fd(character, 1);
+		bit = 0;
+		character = 0;
+	}
+//	if (signal == SIGUSR2)
+//		ft_printf("0");
+}
 
-	my_PID = getpid();
-	ft_printf("Server PID = %d\n", (int)my_PID);
+// line 20 if we reveive the SIGUSR1 msg
+// line 21 we put in the varaible character bit by bit for the 
+// first character of the message
+// line 24 we increment till there's the 8 bit
+// line 27 once it's done we print the character and 
+// reset the bit counter and the character
+// if it'a 1, it's writen by sig1 if it's 0 sig2
+int	main(void)
+{
+	pid_t	my_pid;
 
-	while(1)
-		sleep(5);
-	return(0);
+	my_pid = getpid();
+	ft_printf("Server PID = %d\n", (int)my_pid);
+	signal(SIGUSR1, print_msg);
+	signal(SIGUSR2, print_msg);
+	while (1)
+		sleep (5);
+	return (0);
 }
 
 /*pid_t = variable of process identification. Is an (int)
@@ -42,15 +72,13 @@ parent continues*/
 //using ctrl+c for example
 //sigemptyset = initialize a signal mask to exclude all signals
 //sigaddset = add a signal to the signal mask
-//sigaction = used to chande the action taken by a process on receipt
-//of a specific signal
-//kill = command used to send simple messages to process running on 
-//the system. By defalut, the message sent is the 
-//termination signal(sigterm)
+//
 //pause = function to wait until a signal arrives
-//usleep =  suspend the current processe for the number of microseconds
 //passed to it
 //global variable = variable that could be present in every part of the program
 //not necessary to use it in a parameter of a function
 //SIGUSR1 = user defined signal 1. By default terminate process
 //SIGUSR2 = user defined signal 2. By default terminate process
+//
+//line 50, a sleep function is used because if there is only the while(1) loop
+//the program doesn't have the time to reveive the message

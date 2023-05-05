@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   minitalk_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ageiser <ageiser@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/18 16:25:32 by ageiser           #+#    #+#             */
-/*   Updated: 2023/05/05 15:20:31 by ageiser          ###   ########.fr       */
+/*   Created: 2023/05/05 15:39:36 by ageiser           #+#    #+#             */
+/*   Updated: 2023/05/05 15:40:06 by ageiser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,4 @@ void	send_msg(int server_pid, char msg);
 //static void	print_msg(int signal);
 
 #endif
+
