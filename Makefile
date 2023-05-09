@@ -6,7 +6,7 @@
 #    By: ageiser <ageiser@student.42barcelona.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 13:21:50 by ageiser           #+#    #+#              #
-#    Updated: 2023/04/25 13:50:46 by ageiser          ###   ########.fr        #
+#    Updated: 2023/05/09 15:01:54 by ageiser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NO_COLOR=\033[0m
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 OBJ_DIR = obj/
 

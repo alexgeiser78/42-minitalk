@@ -6,7 +6,7 @@
 /*   By: ageiser <ageiser@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:21:08 by ageiser           #+#    #+#             */
-/*   Updated: 2023/05/05 17:03:25 by ageiser          ###   ########.fr       */
+/*   Updated: 2023/05/09 15:27:58 by ageiser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	send_msg(int server_pid, char msg)
 			kill(server_pid, SIGUSR2);
 		else
 			kill(server_pid, SIGUSR1);
-		usleep(400); // check value
+		usleep(200);
 		bit--;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ageiser <ageiser@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:20:51 by ageiser           #+#    #+#             */
-/*   Updated: 2023/05/05 18:13:45 by ageiser          ###   ########.fr       */
+/*   Updated: 2023/05/09 15:30:50 by ageiser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,7 @@ static void	print_msg(int signal)
 	static int	character;
 
 	if (signal == SIGUSR1)
-//	{
 		character += 1 << (7 - bit);
-//	ft_printf("bit = %d\n", bit); //
-//	ft_printf("character = %d\n", character);//
-//	ft_printf("1");
-//	}
 	bit++;
 	if (bit == 8)
 	{
@@ -31,8 +26,6 @@ static void	print_msg(int signal)
 		bit = 0;
 		character = 0;
 	}
-//	if (signal == SIGUSR2)
-//		ft_printf("0");
 }
 
 // line 20 if we reveive the SIGUSR1 msg
@@ -42,6 +35,7 @@ static void	print_msg(int signal)
 // line 27 once it's done we print the character and 
 // reset the bit counter and the character
 // if it'a 1, it's writen by sig1 if it's 0 sig2
+
 int	main(void)
 {
 	pid_t	my_pid;
