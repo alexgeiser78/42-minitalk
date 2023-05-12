@@ -6,7 +6,7 @@
 #    By: ageiser <ageiser@student.42barcelona.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 13:21:50 by ageiser           #+#    #+#              #
-#    Updated: 2023/05/09 15:01:54 by ageiser          ###   ########.fr        #
+#    Updated: 2023/05/12 15:57:57 by ageiser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,10 +39,13 @@ OBJCLIENT = $(SRCCLIENT:.c=.o)
 OBJSERVERBONUS = $(SRCSERVERBONUS:.c=.o)
 OBJCLIENTBONUS = $(SRCCLIENTBONUS:.c=.o)
 
-DEP = $(addprefix $(OBJ_DIR), $(SRCSERVER:.c=.d), $(SRCCLIENT:.c=.d), $(SRCSERVERBONUS:.c=.d), $(SRCCLIENTBONUS:.c=.d))
+DEP = $(addprefix $(OBJ_DIR), $(SRCSERVER:.c=.d))
+DEP2 =$(addprefix $(OBJ_DIR), $(SRCCLIENT:.c=.d))
+DEP3 =$(addprefix $(OBJ_DIR), $(SRCSERVERBONUS:.c=.d))
+DEP4 =$(addprefix $(OBJ_DIR), $(SRCCLIENTBONUS:.c=.d))
 
-TMP_OBJ = $(addprefix $(OBJ_DIR), $(OBJSERVER) $(OBJCLIENT) $(OBJSERVERBONUS) $(OBJCLIENTBONUS))
-
+TMP_OBJ = $(addprefix $(OBJ_DIR), $(OBJSERVER) $(OBJCLIENT))
+TMP_OBJ2 = $(addprefix $(OBJ_DIR), $(OBJSERVERBONUS) $(OBJCLIENTBONUS))
 INCLUDE =  -I ./libft/ -I ./printf
 
 LIB_DIR= ./libft
@@ -51,8 +54,7 @@ PRINT_DIR = ./printf
 LIB2 = printf/libftprintf.a
 RM = rm -rf
 
-all: makelib makeprint $(OBJ_DIR) $(SERVER) $(CLIENT)                         # $(SERVERBONUS) $(CLIENTBONUS)
-
+all: makelib makeprint $(OBJ_DIR) $(SERVER) $(CLIENT)
 makelib:
 	make -C $(LIB_DIR)
 
@@ -67,17 +69,18 @@ $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 
 $(SERVER): $(TMP_OBJ) $(LIB) $(LIB2)
-		$(CC) $(CFLAGS) ./obj/server.o $(LIB) $(LIB2) -o $(SERVER)
+		$(CC) $(CFLAGS) ./obj/server.o $(LIB) $(LIB2) -o $(SERVER) -include $(DEP)
 		@echo "$(GREEN) librairy compiled and server executable generated$(NO_COLOR)"
 
 $(CLIENT): $(TMP_OBJ) $(LIB) $(LIB2)
-		$(CC) $(CFLAGS) ./obj/client.o $(LIB) $(LIB2) -o $(CLIENT)
+		$(CC) $(CFLAGS) ./obj/client.o $(LIB) $(LIB2) -o $(CLIENT) -include $(DEP2)
 		@echo "$(GREEN) librairy compiled and client executable generated$(NO_COLOR)"
 
-bonus: $(TMP_OBJ) $(LIB)
-		$(CC) $(CFLAGS) ./obj/server_bonus.o $(LIB) $(LIB2) -o $(SERVERBONUS)
-		$(CC) $(CFLAGS) ./obj/client_bonus.o $(LIB) $(LIB2) -o $(CLIENTBONUS)	
-		@echo "$(GREEN) librairy compiled and bonus executable generated$(NO_COLOR)"
+bonus : $(TMP_OBJ2) $(LIB) $(LIB2)
+	$(CC) $(CFLAGS) ./obj/server_bonus.o $(LIB) $(LIB2) -o $(SERVERBONUS) -include $(DEP3)
+	$(CC) $(CFLAGS) ./obj/client_bonus.o $(LIB) $(LIB2) -o $(CLIENTBONUS) -include $(DEP4)
+	@touch $@	
+	@echo "$(GREEN) librairy compiled and bonus executable generated$(NO_COLOR)"
 
 
 
@@ -93,10 +96,10 @@ fclean : clean
 		$(RM) $(CLIENT)
 		$(RM) $(SERVERBONUS)
 		$(RM) $(CLIENTBONUS)
+		$(RM) bonus
 		@echo "$(RED)library (*.a) and executable removed $(NO_COLOR)"
 
 re : fclean all
 	@echo "$(YELLOW)make fclean  make all $(NO_COLOR)"
 
--include $(DEP)
-.PHONY : all clean fclean re bonus makelib makeprint
+.PHONY : all clean fclean re makelib makeprint
