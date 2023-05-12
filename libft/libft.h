@@ -6,7 +6,7 @@
 /*   By: ageiser <ageiser@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:27:24 by ageiser           #+#    #+#             */
-/*   Updated: 2022/10/07 12:46:50 by ageiser          ###   ########.fr       */
+/*   Updated: 2023/04/28 15:51:02 by ageiser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,8 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+int		ft_isstringdigit(char *string);
+int		ft_isdigitis1(int c);
+
 #endif
