@@ -6,7 +6,7 @@
 #    By: ageiser <ageiser@student.42barcelona.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 13:21:50 by ageiser           #+#    #+#              #
-#    Updated: 2023/05/12 15:57:57 by ageiser          ###   ########.fr        #
+#    Updated: 2023/05/15 15:57:10 by ageiser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,15 +68,15 @@ $(OBJ_DIR)%.o	:%.c Makefile
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 
-$(SERVER): $(TMP_OBJ) $(LIB) $(LIB2)
+$(SERVER): $(TMP_OBJ) $(LIB) $(LIB2) minitalk.h
 		$(CC) $(CFLAGS) ./obj/server.o $(LIB) $(LIB2) -o $(SERVER) -include $(DEP)
 		@echo "$(GREEN) librairy compiled and server executable generated$(NO_COLOR)"
 
-$(CLIENT): $(TMP_OBJ) $(LIB) $(LIB2)
+$(CLIENT): $(TMP_OBJ) $(LIB) $(LIB2) minitalk.h
 		$(CC) $(CFLAGS) ./obj/client.o $(LIB) $(LIB2) -o $(CLIENT) -include $(DEP2)
 		@echo "$(GREEN) librairy compiled and client executable generated$(NO_COLOR)"
 
-bonus : $(TMP_OBJ2) $(LIB) $(LIB2)
+bonus : $(TMP_OBJ2) $(LIB) $(LIB2) minitalk.h
 	$(CC) $(CFLAGS) ./obj/server_bonus.o $(LIB) $(LIB2) -o $(SERVERBONUS) -include $(DEP3)
 	$(CC) $(CFLAGS) ./obj/client_bonus.o $(LIB) $(LIB2) -o $(CLIENTBONUS) -include $(DEP4)
 	@touch $@	
